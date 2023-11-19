@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../Components/SectionTitle";
-import RecomendCard from "../Shared/RecomendCard";
+import FoodCard from "../Order/FoodCard";
 
 const Recomend = () => {
 
@@ -22,7 +22,7 @@ const Recomend = () => {
             </SectionTitle>
             <div className='grid gap-x-10 grid-cols-1 md:grid-cols-3'>
                 {
-                    menu.map(item => <RecomendCard key={item._id} item={item}></RecomendCard>)
+                    menu.map(item => <FoodCard key={item._id} item={item}></FoodCard>)
                 }
             </div>
 

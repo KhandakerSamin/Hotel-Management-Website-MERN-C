@@ -8,6 +8,10 @@ import Order from "../Pages/Order/Order";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import ContactUs from "../Pages/ContactUs/ContactUs";
+import Dashboard from "../Layout/Dashboard";
+import Cart from "../Pages/Dashboard/Cart";
+import PrivateRoute from "../Routes/PrivateRoute";
+import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
 
   export const router = createBrowserRouter([
     {
@@ -39,5 +43,22 @@ import ContactUs from "../Pages/ContactUs/ContactUs";
     {
       path:'/register',
       element:<Register></Register>
+    },
+    {
+      path:'/dashboard',
+      element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+      children:[
+        {
+          path:'cart',
+          element:<Cart></Cart>
+        },
+
+        // admin routes:
+
+        {
+          path:'allUsers',
+          element:<AllUsers></AllUsers>
+        }
+      ]
     }
   ]);

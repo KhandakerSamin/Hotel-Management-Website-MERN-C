@@ -2,12 +2,13 @@ import Cover from "../Shared/Cover";
 import contactImg from '../../assets/contact/banner.jpg'
 import SectionTitle from "../../Components/SectionTitle";
 import { Form } from "react-router-dom";
-// import ReCAPTCHA from "react-google-recaptcha";
-// import React from "react";
+import { Helmet } from "react-helmet-async";
+import ReCAPTCHA from "react-google-recaptcha";
+import React from "react";
 
 const ContactUs = () => {
 
-    // const recaptchaRef = React.createRef();
+    const recaptchaRef = React.createRef();
 
 
     const handleSendMessege = e => {
@@ -24,12 +25,19 @@ const ContactUs = () => {
             messege
         }
         console.log(newMessege);
-        // const recaptchaValue = recaptchaRef.current.getValue();
-        // this.props.handleSendMessege(recaptchaValue);
+        const recaptchaValue = recaptchaRef.current.getValue();
+        this.props.handleSendMessege(recaptchaValue);
     }
 
     return (
         <div className="max-w-screen-2xl">
+
+            <Helmet>
+                <title>
+                    Bristo Boss | Contact Us
+                </title>
+            </Helmet>
+
             <Cover
                 title={'contact Us'}
                 subtitle={'Would you like to try a dish?'}
@@ -138,11 +146,12 @@ const ContactUs = () => {
 
                     <div className="min-h-[200px] ">
 
-                        {/* <ReCAPTCHA
+                        <ReCAPTCHA
                             ref={recaptchaRef}
-                            sitekey="6LeIxAcTAAAAAKl1HfhTzSb6cJi7ePM1R0VhX6z0"
+                            sitekey="6Lergg4pAAAAANH9UVPCWRm_MH6lsceGLnJV0Qy5"
                             onChange={handleSendMessege}
-                        /> */}
+                        />
+                        
                     </div>
 
                     <div className="flex justify-center items-center">

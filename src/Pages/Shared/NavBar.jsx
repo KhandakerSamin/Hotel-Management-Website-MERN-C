@@ -1,6 +1,37 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import icon from '../../assets/icon/pngwing.com.png'
+import useCart from "../../hooks/useCart";
 
 const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const [cart] = useCart();
+
+    const handleLogOut = () => {
+        Swal.fire({
+            title: "Are you sure to log out?",
+            text: "Once you logout you have to login again",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Log Out!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logOut()
+                    .then(res => console.log(res))
+                Swal.fire({
+                    title: "Logged Out!",
+                    text: "Your Account logged Out Successfully",
+                    icon: "success"
+                });
+            }
+        });
+    }
+
+
     const navLinks = <>
         <Link to='/' ><li><a>HOME</a></li></Link>
         <Link to='/contactUs'><li><a>CONTACT US</a></li>
@@ -8,8 +39,19 @@ const NavBar = () => {
         <li><a>DASHBOARD</a></li>
         <Link to='/menu'><li><a>OUR MENU</a></li></Link>
         <Link to='/order/Salads'><li><a>OUR SHOP</a></li></Link>
-        <Link to='/login'><li><a>Log in</a></li></Link>
+        <Link to='/dashboard'>
+            <div className="relative">
+                <img className="h-10 w-10 rounded-xl" src={icon} alt="" />
+                <div className="badge h-6 w-6 rounded-full text-white font-bold bg-green-500 border-none  absolute top-5 left-6">{cart.length}</div>
+            </div>
+        </Link>
+        {
+            user ? <button onClick={handleLogOut}><Link><li><a>Log Out</a></li></Link></button>
+                : <Link to='/login'><li><a>Log in</a></li></Link>
+        }
+
     </>
+
     return (
         <div className="drawer max-w-screen-2xl mx-auto fixed z-10">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />

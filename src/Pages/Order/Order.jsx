@@ -6,9 +6,10 @@ import 'react-tabs/style/react-tabs.css';
 import OrderTab from './OrderTab';
 import useMenu from '../../hooks/useMenu';
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 const Order = () => {
-    const categories = ['Salads', 'Pizza' , 'Soups', 'Dessert'];
-    const {category} = useParams();
+    const categories = ['Salads', 'Pizza', 'Soups', 'Dessert'];
+    const { category } = useParams();
     const initialIndex = categories.indexOf(category);
     const [tabIndex, setTabIndex] = useState(initialIndex);
     const [menu] = useMenu()
@@ -19,6 +20,15 @@ const Order = () => {
     const soups = menu.filter(item => item.category === 'soup')
     return (
         <div>
+
+            <Helmet>
+                <title>
+                    Bristo Boss | Order
+                </title>
+            </Helmet>
+
+
+
             <Cover img={orderBg} title={'OUR SHOP'} subtitle={'Would you like to try a dish?'}></Cover>
             <div className='max-w-screen-xl mx-auto my-16'>
                 <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
